@@ -17,7 +17,7 @@ function [x, t] = rk45(f, x, t, simParam)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Author       :    Muhan Zhao and Thomas Bewley
 % Institute    :    Mechanical and Aerospace Engineering, UC San Diego
-% Date         :    Feb., 2023
+% Date         :    Created Feb., 2023; Modified Sep. 21, 2023
 
 
 %%%%%%%%%%
