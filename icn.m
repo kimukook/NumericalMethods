@@ -1,4 +1,4 @@
-function x = icn(f, g, x, t, simParam)
+function [x, t] = icn(f, x, t, simParam)
 % Iterative Crank-Nicolson method for time advancement of Nonlinear ODE
 % dx/dt = f(x, t). For reference see: 
 % Input
@@ -17,6 +17,9 @@ end
 
 if nargin < 5 ||  ~isfield(simParam, 'method')
     simParam.method = 'Picard';
+elseif nargin < 5 || (isfield(simParam, 'method') && strcmp(simParam.method, 'Newton'))
+    simParam.method = 'Newton';
+    g = simParam.g;
 end
 
 n = size(x, 1); h = simParam.h; T = simParam.T; method = simParam.method;
