@@ -1,4 +1,4 @@
-function [ind, NABzf, NABd] = twoD_uniform_boundaryCondition(Ns)
+function [ind, NABzf] = twoD_uniform_no_flux_bc(Ns)
 % Define the linear operator for the boundary conditions used in CAPOPS project 
 % Input:
 % Output:
@@ -33,7 +33,7 @@ north = 1+Nx*(Ny-1) : Nx*Ny;
 % removed.
 ind = cat(2, south, reshape(cat(1, west, east), 1, 2*Ny), north);
 
-NABzf = zeros(2*(Nx+Ny), Nx*Ny); NABd = zeros(2*(Nx+Ny), Nx*Ny);
+NABzf = zeros(2*(Nx+Ny), Nx*Ny);
 for k = 1 : size(ind, 2)
     c = ind(k);
     n = ind(k) + Nx;
@@ -45,25 +45,22 @@ for k = 1 : size(ind, 2)
         % south boundary, forward diff.
         NABzf(k, c) = -1;
         NABzf(k, n) =  1;
-        NABd(k, c) = 1;
     
     elseif mod(c, Nx) == 1 % && c > Nx && c < 1+Nx*(Ny-1)
         % west boundary, forward diff.
         NABzf(k, c) = -1;
         NABzf(k, e) =  1;
-        NABd(k, c) = 1;
 
     elseif mod(ind(k), Nx) == 0 % && c > Nx && c < 1+Nx*(Ny-1)
         % east bounday, backward diff.
         NABzf(k, c) =  1;
         NABzf(k, w) = -1;
-        NABd(k, c) = 1;
         
     elseif ind(k) >= 1+Nx*(Ny-1)
         % north boundary, backward diff.
         NABzf(k, c) =  1;
         NABzf(k, s) = -1;
-        NABd(k, c) = 1;
+
     end
 end
 

@@ -39,6 +39,7 @@ while abs(t) < abs(T)
             xhat = xhat - omega*Fprime\F;
         elseif strcmp(method, 'Picard')
             % Picard 
+            % find the zero root of vector function F
             F = xhat - x - h/2*(f(xhat)+f(x));
             xstar = x + h/2*(f(xhat)+f(x));
             xhat = omega*xstar + (1-omega)*xhat;
