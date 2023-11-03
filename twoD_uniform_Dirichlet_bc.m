@@ -45,11 +45,11 @@ for k = 1 : size(ind, 2)
         % west boundary, forward diff.
         NABd(k, c) = 1;
 
-    elseif mod(ind(k), Nx) == 0 % && c > Nx && c < 1+Nx*(Ny-1)
+    elseif mod(c, Nx) == 0 % && c > Nx && c < 1+Nx*(Ny-1)
         % east bounday, backward diff.
         NABd(k, c) = 1;
         
-    elseif ind(k) >= 1+Nx*(Ny-1)
+    elseif c >= 1+Nx*(Ny-1)
         % north boundary, backward diff.
         NABd(k, c) = 1;
     end

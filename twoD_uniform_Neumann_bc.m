@@ -51,12 +51,12 @@ for k = 1 : size(ind, 2)
         NABn(k, c) = -1;
         NABn(k, e) =  1;
 
-    elseif mod(ind(k), Nx) == 0 % && c > Nx && c < 1+Nx*(Ny-1)
+    elseif mod(c, Nx) == 0 % && c > Nx && c < 1+Nx*(Ny-1)
         % east bounday, backward diff.
         NABn(k, c) =  1;
         NABn(k, w) = -1;
         
-    elseif ind(k) >= 1+Nx*(Ny-1)
+    elseif c >= 1+Nx*(Ny-1)
         % north boundary, backward diff.
         NABn(k, c) =  1;
         NABn(k, s) = -1;
