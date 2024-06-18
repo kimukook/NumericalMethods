@@ -1,4 +1,4 @@
-function [NABx, NABy] = twoD_nabla_uniform(Nx, Ny, delta)
+function [NABx, NABy] = twoD_nabla_uniform(Ns, delta)
 % Compute the nabla operator for x and y axis assuming a uniform spacing 
 % discretization. Inside the domain, the nabla operator (the first-order 
 % derivative) is approximated by the second-order central finite differencing 
@@ -30,6 +30,11 @@ function [NABx, NABy] = twoD_nabla_uniform(Nx, Ny, delta)
 
 % 2nd order central differencing scheme
 % Nabla operator for x-axis
+if isvector(Ns)
+    Nx = Ns(1); Ny = Ns(2);
+elseif isscalar(Ns)
+    Nx = Ns; Ny = Ns;
+end
 ex = ones(Nx, 1); % unit vector with all entries being 1
 Lx = spdiags([-ex/2, zeros(Nx, 1), ex/2], [-1, 0, 1], Nx, Nx);
 
