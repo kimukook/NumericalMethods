@@ -30,10 +30,11 @@ function [NABx, NABy] = twoD_nabla_uniform(Ns, delta)
 
 % 2nd order central differencing scheme
 % Nabla operator for x-axis
-if isvector(Ns)
-    Nx = Ns(1); Ny = Ns(2);
-elseif isscalar(Ns)
+if isscalar(Ns)
     Nx = Ns; Ny = Ns;
+elseif isvector(Ns) && numel(Ns) > 1
+    % MATLAB treat 1-by-1 scalar as vector
+    Nx = Ns(1); Ny = Ns(2);
 end
 ex = ones(Nx, 1); % unit vector with all entries being 1
 Lx = spdiags([-ex/2, zeros(Nx, 1), ex/2], [-1, 0, 1], Nx, Nx);
