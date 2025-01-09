@@ -1,4 +1,4 @@
-function [NABx, NABy] = twoD_nabla_uniform(Ns, delta)
+function [NABx, NABy] = twoD_nabla_uniform(Ns, ms)
 % Compute the nabla operator for x and y axis assuming a uniform spacing 
 % discretization. Inside the domain, the nabla operator (the first-order 
 % derivative) is approximated by the second-order central finite differencing 
@@ -15,9 +15,8 @@ function [NABx, NABy] = twoD_nabla_uniform(Ns, delta)
 % of this script.
 % 
 % Input:
-%       Nx      : The number of discretized points in x
-%       Ny      : The number of discretized points in y
-%       delta   : The step size of each axis
+%       Ns      : 2D array, the number of discretized points in x and y
+%       ms      : 2D array, the spacing of x and y
 % Example:
 % [NABx, NABy] = twoD_nabla_uniform(64, 64, .01);
 % 
@@ -49,7 +48,7 @@ temp = zeros(1, Nx); temp(end) = 3/2; temp(end-1) = -2; temp(end-2) = 1/2;
 Lx(end, :) = temp;
 
 % assemble NABx operator along y-axis
-NABx = kron(eye(Ny), Lx); NABx = NABx/delta;
+NABx = kron(eye(Ny), Lx); NABx = NABx/ms(1);
 
 % Nabla operator for y-axis
 ey = ones(Nx, 1);
@@ -67,6 +66,6 @@ NABy(1:Ny, 1:3*Ny) = temp;
 temp = cat(2, 1/2*eye(Ny), -2*eye(Ny), 3/2*eye(Ny));
 NABy(end-Ny+1:end, end-3*Ny+1:end) = temp;
 
-NABy = NABy/delta;
+NABy = NABy/ms(2);
 
 end
